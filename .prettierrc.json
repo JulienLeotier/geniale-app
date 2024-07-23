@@ -1,0 +1,16 @@
+{
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "importOrder": [
+      "^@/(.*)$",
+      "^@/model/(.*)$",
+      "^@/components/(.*)$",
+      "^@/api/(.*)$",
+      "^ant-design-vue/dist/reset.css",
+      "antd-css-utilities/utility.min.css",
+      "^@/assets/(.*)$",
+      "^[./]",
+      "<THIRD_PARTY_MODULES>"
+    ],
+    "importOrderSeparation": true
+  }
+  

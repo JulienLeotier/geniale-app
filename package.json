@@ -1,0 +1,38 @@
+{
+  "name": "quest-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20.14.10",
+    "@vueuse/core": "^10.11.0",
+    "ant-design-vue": "4.x",
+    "dayjs": "^1.11.11",
+    "eslint": "^9.6.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "p-limit": "^6.0.0",
+    "pinia": "^2.1.7",
+    "prettier": "^3.3.2",
+    "unplugin-vue-components": "^0.27.2",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue": "^3.4.31",
+    "vue-router": "4",
+    "vue3-otp-input": "^0.5.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "eslint-config-prettier": "^9.1.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vue-tsc": "^2.0.26"
+  }
+}
