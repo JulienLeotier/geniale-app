@@ -20,7 +20,7 @@ const onNext = () => {
         align-content: center;
       "
     >
-      <a-image src="./image.png" :preview="false" />
+      <a-image src="./logo.png" :preview="false" />
     </a-col>
     <a-col
       :xs="24"
@@ -39,16 +39,15 @@ const onNext = () => {
         <a-col :span="24">
           <a-typography class="title-onbording">
             Bienvenue dans
-            <div>Pro-psy</div>
+            <div>GEN-IA-LE</div>
           </a-typography>
         </a-col>
         <a-col :span="24">
           <a-typography class="paragraphe-onbording">
-            Pro-psy est une application innovante qui prévient les burn-out et
-            améliore le bien-être au travail. Grâce à des évaluations
-            personnalisées, des programmes gamifiés, et un coaching spécialisé,
-            nous aidons les entreprises à créer des environnements de travail
-            sains et productifs, où chaque employé peut s'épanouir pleinement.
+            Votre application de voyage temporel en toute sécurité et simplicité
+            lancer vous dans une aventure inoubliable avec GEN-IA-LE.
+            <br />
+            Pour commencer, veuillez vous connecter ou créer un compte.
           </a-typography>
         </a-col>
       </a-row>
@@ -80,6 +79,7 @@ const onNext = () => {
 .paragraphe-onbording {
   font-size: 16px;
   padding: 8px;
+  margin: 8px;
   color: #797979;
   text-align: center;
 }

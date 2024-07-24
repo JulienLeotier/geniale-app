@@ -1,4 +1,5 @@
 import { useFetchAbortCatch } from "@/api/fetch-composer";
+import { IUser } from "@/api/models/api/user";
 import { ExtractPathParametersFromEndpoint } from "@/api/utils/ts/extract-path-parameters-from-endpoint";
 import {
   ILogin,
@@ -77,11 +78,27 @@ export const useLoginApi = () => {
     >(config);
     return fetchSetup;
   };
+
+  const register = () => {
+    const config = {
+      endpoint: "/users/register",
+      requestOptions: {
+        method: "POST",
+      },
+    } as const;
+    const fetchSetup = useFetchAbortCatch<
+      IUser,
+      ExtractPathParametersFromEndpoint<typeof config.endpoint>
+    >(config);
+    return fetchSetup;
+  };
+
   return {
     postLogin,
     googleCallback,
     googleUrl,
     askResetPassword,
     resetPassword,
+    register,
   };
 };

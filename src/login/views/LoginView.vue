@@ -6,7 +6,7 @@ const {
   formState,
   onFinish,
   onFinishFailed,
-  googleAuth,
+  register,
   validateMessages,
   disabled,
   isFetching,
@@ -37,9 +37,9 @@ const redirectForgetPassword = () => {
           "
         >
           <a-image
-            src="./logo.webp"
+            src="./login.png"
             :preview="false"
-            style="border-radius: 50%; width: 150px; height: 150px; margin: 8px"
+            style="border-radius: 50%; width: 250px; height: 250px; margin: 8px"
           />
         </a-col>
         <a-row justify="center" align="center" wrap="wrap">
@@ -51,7 +51,7 @@ const redirectForgetPassword = () => {
               align-content: center;
             "
           >
-            <h1>Login</h1>
+            <h1>Connexion</h1>
           </a-col>
           <a-col
             :span="24"
@@ -167,7 +167,7 @@ const redirectForgetPassword = () => {
             "
           >
             <a-button
-              @click="googleAuth()"
+              @click="register()"
               style="
                 height: 56px;
                 width: 302px;
@@ -175,7 +175,7 @@ const redirectForgetPassword = () => {
                 font-size: 16px;
               "
             >
-              Se connecter avec google
+              S'inscrire
             </a-button>
           </a-col>
         </a-row>

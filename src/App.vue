@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { theme } from "@/assets/theme";
 
-import router, { AccountRoute, HomeRoute, RolesRoute } from "./router";
+import {
+  AccountRoute,
+  ForgetPassword,
+  HomeRoute,
+  LoginRoute,
+  onboardingRoute,
+  Register,
+  ResetPassword,
+  RolesRoute,
+} from "./router";
 
 import {
   HomeOutlined,
@@ -9,35 +18,60 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons-vue";
-import { ref } from "vue";
+import { computed, onBeforeMount, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 
 const homeActive = ref(true);
 const healthProfessionalActive = ref(false);
 const accountActive = ref(false);
-const onClickHome = () => {
+const router = useRouter();
+const currentRouter = ref(router.currentRoute.value);
+
+onBeforeMount(() => {
+  currentRouter.value = router.currentRoute.value;
+});
+
+watch(
+  () => router.currentRoute.value,
+  () => {
+    currentRouter.value = router.currentRoute.value;
+  },
+  { deep: true },
+);
+
+const onClickHome = async () => {
   homeActive.value = true;
   healthProfessionalActive.value = false;
   accountActive.value = false;
-  router.push({ name: HomeRoute.name });
+  await router.push({ name: HomeRoute.name });
 };
-const onClickHealthProfessional = () => {
+const onClickHealthProfessional = async () => {
   healthProfessionalActive.value = true;
   homeActive.value = false;
   accountActive.value = false;
-  router.push({ name: RolesRoute.name });
+  await router.push({ name: RolesRoute.name });
 };
-const onClickAccount = () => {
+const onClickAccount = async () => {
   accountActive.value = true;
   homeActive.value = false;
   healthProfessionalActive.value = false;
-  router.push({ name: AccountRoute.name });
+  await router.push({ name: AccountRoute.name });
 };
+const currentRouteName = computed(() => {
+  return (
+    currentRouter.value.name !== LoginRoute.name &&
+    currentRouter.value.name !== onboardingRoute.name &&
+    currentRouter.value.name !== ForgetPassword.name &&
+    currentRouter.value.name !== ResetPassword.name &&
+    currentRouter.value.name !== Register.name
+  );
+});
 </script>
 
 <template>
   <a-config-provider :theme="theme">
     <router-view />
-    <a-layout-footer class="bottom-menu">
+    <a-layout-footer class="bottom-menu" v-if="currentRouteName">
       <a-row justify="space-around" style="height: 80px">
         <a-col>
           <a-button
@@ -65,7 +99,7 @@ const onClickAccount = () => {
               </a-col>
               <a-col :span="24"
                 ><span :style="homeActive ? { color: '#E5A3A3' } : {}"
-                  >Home</span
+                  >Acceuil</span
                 ></a-col
               >
             </a-row>
@@ -97,7 +131,7 @@ const onClickAccount = () => {
               <a-col :span="24"
                 ><span
                   :style="healthProfessionalActive ? { color: '#E5A3A3' } : {}"
-                  >Psychologues</span
+                  >Gallerie photo</span
                 >
               </a-col>
             </a-row>

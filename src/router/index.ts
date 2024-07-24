@@ -3,6 +3,7 @@ import { ParamsToObject } from "@/api/utils/parse-object-value-to-string";
 import HomeViews from "@/home/views/HomeViews.vue";
 import ForgetPasswordView from "@/login/views/ForgetPasswordView.vue";
 import LoginView from "@/login/views/LoginView.vue";
+import RegisterView from "@/login/views/RegisterView.vue";
 import ResetPasswordView from "@/login/views/ResetPasswordView.vue";
 import OnbordingView from "@/onbording/views/onbordingView.vue";
 import AccountView from "@/parameter/views/AccountView.vue";
@@ -16,13 +17,13 @@ import { useStore } from "@/store";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 export const LoginRoute = {
-  path: "/",
+  path: "/Login",
   name: "Login",
   component: LoginView,
 } as const as RouteRecordRaw;
 
 export const onboardingRoute = {
-  path: "/onboarding",
+  path: "/",
   name: "onBoarding",
   component: OnbordingView,
 } as const as RouteRecordRaw;
@@ -85,6 +86,12 @@ export const ForgetPassword = {
   path: "/forget-password",
   name: "ForgetPassword",
   component: ForgetPasswordView,
+} as const as RouteRecordRaw;
+
+export const Register = {
+  path: "/register",
+  name: "Register",
+  component: RegisterView,
 } as const as RouteRecordRaw;
 
 export const AccountRoute = {
@@ -248,6 +255,7 @@ const routes: Array<RouteRecordRaw> = [
   createRightsRoute,
   onboardingRoute,
   CheckCodeRoute,
+  Register,
 ];
 
 const router = createRouter({

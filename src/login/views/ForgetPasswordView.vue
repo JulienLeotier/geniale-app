@@ -52,7 +52,11 @@ const handleOkError = (_e: MouseEvent) => {
               align-content: center;
             "
           >
-            <a-image src="./image_forget_password.png" :preview="false" />
+            <a-image
+              src="./image_forget_password.png"
+              :preview="false"
+              style="max-width: 500px; max-height: auto"
+            />
           </a-col>
           <a-col
             :span="24"

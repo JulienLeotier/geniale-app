@@ -785,8 +785,8 @@ export const theme = {
   "gold-10": "#613400",
   token: {
     colorSuccess: "#52c41a",
-    colorPrimary: "#e5a3a3",
-    colorInfo: "#e5a3a3",
+    colorPrimary: "#f1b641d1",
+    colorInfo: "#f1b641d1",
     colorLink: "#000000",
     borderRadius: 8,
   },

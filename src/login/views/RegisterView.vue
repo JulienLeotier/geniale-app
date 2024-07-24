@@ -1,53 +1,42 @@
 <script lang="ts" setup>
-import { useLogin } from "@/login/composition/use-login";
 import router, { LoginRoute } from "@/router";
 import { buttonStyle } from "@/styles/button";
 
-import { LockOutlined, LeftOutlined } from "@ant-design/icons-vue";
+import { useRegister } from "../composition/use-register";
+import { RegisterformState } from "../models/form";
+
+import {
+  LeftOutlined,
+  LockOutlined,
+  UserOutlined,
+} from "@ant-design/icons-vue";
 
 const {
-  resetPasswordFormState,
-  onFinishResetPassword,
-  validateMessages,
-  disabledResetPassword,
   open,
   openError,
-  ResetPasswordFeching,
-} = useLogin();
-
-const validateConfirmPassword = (_: any, value: string) => {
-  if (value !== resetPasswordFormState.user.password) {
-    return Promise.reject("Les mots de passe ne correspondent pas");
-  }
-  return Promise.resolve();
+  validateMessages,
+  onFinishRegister,
+  validateConfirmPassword,
+  disabledRegister,
+} = useRegister();
+const backToLogin = async () => {
+  await router.push({ name: LoginRoute.name });
 };
-
-const backToLogin = () => {
-  router.push({ name: LoginRoute.name });
-};
-
-const handleOk = (_e: MouseEvent) => {
+const handleOk = async (_e: MouseEvent) => {
   open.value = false;
-  router.push({ name: LoginRoute.name });
+  await router.push({ name: LoginRoute.name });
 };
 const handleOkError = (_e: MouseEvent) => {
   openError.value = false;
 };
 </script>
-
 <template>
-  <a-spin :spinning="ResetPasswordFeching">
+  <a-spin :spinning="false">
     <a-modal v-model:open="open" @ok="handleOk">
-      <a-result
-        status="success"
-        title="Mot de passe réinitialisé avec succès"
-      />
+      <a-result status="success" title="Le compte a été créé avec succès" />
     </a-modal>
     <a-modal v-model:open="openError" @ok="handleOkError">
-      <a-result
-        status="error"
-        title="Erreur lors de la réinitialisation du mot de passe"
-      />
+      <a-result status="error" title="Erreur lors de la création du compte" />
     </a-modal>
     <a-button @click="backToLogin" :style="buttonStyle">
       <template #icon> <LeftOutlined /> </template>
@@ -64,7 +53,7 @@ const handleOkError = (_e: MouseEvent) => {
             "
           >
             <a-image
-              src="./image_reset_password.png"
+              src="./image_register.png"
               :preview="false"
               style="max-width: 500px; max-height: auto"
             />
@@ -86,7 +75,7 @@ const handleOkError = (_e: MouseEvent) => {
                   align-content: center;
                 "
               >
-                <h1>Réinitialisation du mot de passe</h1>
+                <h1>Enregistrement du compte</h1>
               </a-col>
               <a-col
                 :span="24"
@@ -96,7 +85,10 @@ const handleOkError = (_e: MouseEvent) => {
                   align-content: center;
                 "
               >
-                <a-typography> Entrez votre nouveau mot de passe </a-typography>
+                <a-typography>
+                  Entrez un email, un nom d'utilisateur et un mot de passe pour
+                  créer un compte
+                </a-typography>
               </a-col>
             </a-row>
           </a-col>
@@ -110,23 +102,56 @@ const handleOkError = (_e: MouseEvent) => {
             "
           >
             <a-form
-              :model="resetPasswordFormState"
-              name="reset_password"
+              :model="RegisterformState"
+              name="normal_login"
               layout="vertical"
               :validate-messages="validateMessages"
-              @finish="onFinishResetPassword"
+              @finish="onFinishRegister"
               style="width: 100vw; padding: 8px"
-              :disabled="ResetPasswordFeching"
             >
+              <a-form-item
+                label="Email"
+                :name="['user', 'email']"
+                :rules="[
+                  {
+                    type: 'email',
+                    required: true,
+                  },
+                ]"
+                style="margin-left: 8px; margin-right: 8px"
+              >
+                <a-input
+                  v-model:value="RegisterformState.user.email"
+                  autocomplete="current-email"
+                  style="height: 48px"
+                  placeholder="Email"
+                >
+                  <template #prefix>
+                    <UserOutlined class="site-form-item-icon" />
+                  </template>
+                </a-input>
+              </a-form-item>
               <a-form-item
                 label="Nom d'utilisateur"
                 :name="['user', 'username']"
-                style="display: none"
+                style="margin-left: 8px; margin-right: 8px"
+                :rules="[
+                  {
+                    required: true,
+                    message: 'Veuillez entrer votre nom d\'utilisateur',
+                  },
+                ]"
               >
                 <a-input
-                  v-model:value="resetPasswordFormState.user.password"
+                  v-model:value="RegisterformState.user.username"
                   autocomplete="username"
-                />
+                  style="height: 48px"
+                  placeholder="Nom d'utilisateur"
+                >
+                  <template #prefix>
+                    <UserOutlined class="site-form-item-icon" />
+                  </template>
+                </a-input>
               </a-form-item>
               <a-form-item
                 label="Mot de passe"
@@ -135,7 +160,7 @@ const handleOkError = (_e: MouseEvent) => {
                 :rules="[
                   {
                     required: true,
-                    message: 'Veuillez entrer votre mot de passe',
+                    message: 'Veuillez entrer votre nouveau mot de passe',
                   },
                   {
                     min: 6,
@@ -155,9 +180,10 @@ const handleOkError = (_e: MouseEvent) => {
                 ]"
               >
                 <a-input-password
-                  v-model:value="resetPasswordFormState.user.password"
-                  autocomplete="new-password"
+                  v-model:value="RegisterformState.user.password"
+                  autocomplete="current-password"
                   style="height: 48px"
+                  placeholder="Mot de passe"
                 >
                   <template #prefix>
                     <LockOutlined class="site-form-item-icon" />
@@ -167,21 +193,22 @@ const handleOkError = (_e: MouseEvent) => {
               <a-form-item
                 label="Confirmer le mot de passe"
                 :name="['user', 'confirmPassword']"
+                style="margin-left: 8px; margin-right: 8px"
                 :rules="[
                   {
                     required: true,
-                    message: 'Veuillez confirmer votre mot de passe',
+                    message: 'Veuillez entrer votre nouveau mot de passe',
                   },
                   {
                     validator: validateConfirmPassword,
                   },
                 ]"
-                style="margin-left: 8px; margin-right: 8px"
               >
                 <a-input-password
-                  v-model:value="resetPasswordFormState.user.confirmPassword"
+                  v-model:value="RegisterformState.user.confirmPassword"
                   autocomplete="new-password"
                   style="height: 48px"
+                  placeholder="Confirmer le mot de passe"
                 >
                   <template #prefix>
                     <LockOutlined class="site-form-item-icon" />
@@ -191,12 +218,12 @@ const handleOkError = (_e: MouseEvent) => {
               <a-form-item>
                 <a-flex justify="center" align="center">
                   <a-button
-                    :disabled="disabledResetPassword"
+                    :disabled="disabledRegister"
                     type="primary"
                     html-type="submit"
                     style="height: 56px; width: 302px"
                   >
-                    Réinitialiser le mot de passe
+                    Créer un compte d'agent
                   </a-button>
                 </a-flex>
               </a-form-item>

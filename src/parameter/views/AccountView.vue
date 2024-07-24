@@ -147,7 +147,7 @@ const onBack = () => {
               align-content: center;
             "
           >
-            <a-avatar :size="120" src="./test.png"> </a-avatar>
+            <a-avatar :size="120" src="./profile.png"> </a-avatar>
           </a-col>
           <a-col
             :span="24"

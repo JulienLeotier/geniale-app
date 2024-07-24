@@ -1,7 +1,7 @@
 import { useLoginApi } from "@/login/composition/use-login-api";
 import { IFormLoginState, IResetPasswordBody } from "@/login/models/form";
 import { ILoginBody } from "@/login/models/login";
-import router, { HomeRoute } from "@/router";
+import router, { HomeRoute, Register } from "@/router";
 import { useStore } from "@/store";
 
 import { message } from "ant-design-vue";
@@ -30,13 +30,7 @@ export const useLogin = () => {
     },
   });
 
-  const {
-    postLogin,
-    googleCallback,
-    googleUrl,
-    askResetPassword,
-    resetPassword,
-  } = useLoginApi();
+  const { postLogin, askResetPassword, resetPassword } = useLoginApi();
   const { data: loginData, isFetching, fetch: CreateLogin } = postLogin();
   const {
     data: askResetPasswordData,
@@ -48,16 +42,6 @@ export const useLogin = () => {
     fetch: ResetPassword,
     isFetching: ResetPasswordFeching,
   } = resetPassword();
-  const {
-    data: googleData,
-    isFetching: isFetchingGoogle,
-    fetch: GoogleAuthFetch,
-  } = googleCallback();
-  const {
-    data: googleUrlData,
-    isFetching: isFetchingGoogleUrl,
-    fetch: GoogleUrlFetch,
-  } = googleUrl();
 
   const store = useStore();
 
@@ -149,11 +133,8 @@ export const useLogin = () => {
     },
   };
 
-  const googleAuth = async () => {
-    await GoogleUrlFetch({});
-    if (googleUrlData.value) {
-      window.location.href = googleUrlData.value.url;
-    }
+  const register = async () => {
+    await router.push({ name: Register.name });
   };
 
   return {
@@ -161,9 +142,6 @@ export const useLogin = () => {
     disabled,
     validateMessages,
     isFetching,
-    googleData,
-    isFetchingGoogle,
-    isFetchingGoogleUrl,
     disabledForgetPassword,
     resetPasswordFormState,
     disabledResetPassword,
@@ -174,8 +152,7 @@ export const useLogin = () => {
     showModal,
     onFinishForgetPassword,
     onFinishFailedForgetPassword,
-    googleAuth,
-    GoogleAuthFetch,
+    register,
     onFinish,
     onFinishFailed,
     onFinishResetPassword,
