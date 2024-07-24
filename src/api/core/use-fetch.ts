@@ -13,7 +13,7 @@ import { useQuery } from "./use-query";
 
 const urls = ((): Urls => {
   const urls: Urls = {
-    api: import.meta.env.QUEST_API_URL ?? "http://localhost:8080",
+    api: import.meta.env.QUEST_API_URL ?? "http://quest.freeboxos.fr:37590",
   };
   return urls;
 })();

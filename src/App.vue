@@ -4,12 +4,12 @@ import { theme } from "@/assets/theme";
 import {
   AccountRoute,
   ForgetPassword,
+  GallerieRoute,
   HomeRoute,
   LoginRoute,
   onboardingRoute,
   Register,
   ResetPassword,
-  RolesRoute,
 } from "./router";
 
 import {
@@ -22,7 +22,7 @@ import { computed, onBeforeMount, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 const homeActive = ref(true);
-const healthProfessionalActive = ref(false);
+const GallerieActive = ref(false);
 const accountActive = ref(false);
 const router = useRouter();
 const currentRouter = ref(router.currentRoute.value);
@@ -41,20 +41,20 @@ watch(
 
 const onClickHome = async () => {
   homeActive.value = true;
-  healthProfessionalActive.value = false;
+  GallerieActive.value = false;
   accountActive.value = false;
   await router.push({ name: HomeRoute.name });
 };
-const onClickHealthProfessional = async () => {
-  healthProfessionalActive.value = true;
+const onClickGallerie = async () => {
+  GallerieActive.value = true;
   homeActive.value = false;
   accountActive.value = false;
-  await router.push({ name: RolesRoute.name });
+  await router.push({ name: GallerieRoute.name });
 };
 const onClickAccount = async () => {
   accountActive.value = true;
   homeActive.value = false;
-  healthProfessionalActive.value = false;
+  GallerieActive.value = false;
   await router.push({ name: AccountRoute.name });
 };
 const currentRouteName = computed(() => {
@@ -109,9 +109,9 @@ const currentRouteName = computed(() => {
         <a-col>
           <a-button
             type="text"
-            @click="onClickHealthProfessional()"
+            @click="onClickGallerie()"
             :style="
-              healthProfessionalActive
+              GallerieActive
                 ? {
                     backgroundColor: 'rgba(241, 181, 65, 0.1)',
                     height: '100%',
@@ -125,14 +125,13 @@ const currentRouteName = computed(() => {
             <a-row justify="center" align="center">
               <a-col :span="24">
                 <TeamOutlined
-                  v-if="healthProfessionalActive"
+                  v-if="GallerieActive"
                   style="font-size: 24px; color: #f1b541"
                 />
                 <TeamOutlined v-else style="font-size: 24px" />
               </a-col>
               <a-col :span="24"
-                ><span
-                  :style="healthProfessionalActive ? { color: '#f1b541' } : {}"
+                ><span :style="GallerieActive ? { color: '#f1b541' } : {}"
                   >Gallerie photo</span
                 >
               </a-col>

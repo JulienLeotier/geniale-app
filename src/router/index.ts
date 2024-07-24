@@ -1,5 +1,6 @@
 import { useWhoIAm } from "@/api/common-api/use-whoiam";
 import { ParamsToObject } from "@/api/utils/parse-object-value-to-string";
+import GallerieViews from "@/gallerie/views/gallerieViews.vue";
 import HomeViews from "@/home/views/HomeViews.vue";
 import ForgetPasswordView from "@/login/views/ForgetPasswordView.vue";
 import LoginView from "@/login/views/LoginView.vue";
@@ -242,6 +243,36 @@ export const createRightsRoute = {
     }
   },
 } as const as RouteRecordRaw;
+
+export const GallerieRoute = {
+  path: "/gallerie",
+  name: "Gallerie",
+  component: GallerieViews,
+  beforeEnter: async (_to, _from, next) => {
+    const store = useStore();
+    const { data: whoiam, fetch: getWhoIam } = useWhoIAm();
+    const response = ParamsToObject(document.location.search);
+    if (response.token) {
+      store.setToken(response.token);
+    }
+    if (localStorage.getItem("token")) {
+      await getWhoIam({});
+      if (!whoiam.value) {
+        store.setToken(null);
+        store.setUser(null);
+        next({ name: "Login" });
+      } else {
+        store.setUser(whoiam.value.user);
+        next();
+      }
+    } else {
+      store.setToken(null);
+      store.setUser(null);
+      next({ name: "Login" });
+    }
+  },
+} as const as RouteRecordRaw;
+
 const routes: Array<RouteRecordRaw> = [
   LoginRoute,
   HomeRoute,
@@ -256,6 +287,7 @@ const routes: Array<RouteRecordRaw> = [
   onboardingRoute,
   CheckCodeRoute,
   Register,
+  GallerieRoute,
 ];
 
 const router = createRouter({
