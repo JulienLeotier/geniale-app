@@ -29,12 +29,38 @@ const currentRouter = ref(router.currentRoute.value);
 
 onBeforeMount(() => {
   currentRouter.value = router.currentRoute.value;
+  if (currentRouter.value.name === HomeRoute.name) {
+    homeActive.value = true;
+    GallerieActive.value = false;
+    accountActive.value = false;
+  } else if (currentRouter.value.name === GallerieRoute.name) {
+    GallerieActive.value = true;
+    homeActive.value = false;
+    accountActive.value = false;
+  } else if (currentRouter.value.name === AccountRoute.name) {
+    accountActive.value = true;
+    homeActive.value = false;
+    GallerieActive.value = false;
+  }
 });
 
 watch(
   () => router.currentRoute.value,
   () => {
     currentRouter.value = router.currentRoute.value;
+    if (currentRouter.value.name === HomeRoute.name) {
+      homeActive.value = true;
+      GallerieActive.value = false;
+      accountActive.value = false;
+    } else if (currentRouter.value.name === GallerieRoute.name) {
+      GallerieActive.value = true;
+      homeActive.value = false;
+      accountActive.value = false;
+    } else if (currentRouter.value.name === AccountRoute.name) {
+      accountActive.value = true;
+      homeActive.value = false;
+      GallerieActive.value = false;
+    }
   },
   { deep: true },
 );
