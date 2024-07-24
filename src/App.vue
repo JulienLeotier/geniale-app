@@ -80,8 +80,9 @@ const currentRouteName = computed(() => {
             :style="
               homeActive
                 ? {
-                    backgroundColor: 'rgba(229,163,163, 0.1)',
+                    backgroundColor: 'rgba(241, 181, 65, 0.1)',
                     height: '100%',
+                    borderRadius: '70%',
                   }
                 : {
                     height: '100%',
@@ -93,12 +94,12 @@ const currentRouteName = computed(() => {
                 <HomeTwoTone
                   v-if="homeActive"
                   style="font-size: 24px"
-                  two-tone-color="#E5A3A3"
+                  two-tone-color="#f1b541"
                 />
                 <HomeOutlined v-else style="font-size: 24px" />
               </a-col>
               <a-col :span="24"
-                ><span :style="homeActive ? { color: '#E5A3A3' } : {}"
+                ><span :style="homeActive ? { color: '#f1b541' } : {}"
                   >Acceuil</span
                 ></a-col
               >
@@ -112,8 +113,9 @@ const currentRouteName = computed(() => {
             :style="
               healthProfessionalActive
                 ? {
-                    backgroundColor: 'rgba(229,163,163, 0.1)',
+                    backgroundColor: 'rgba(241, 181, 65, 0.1)',
                     height: '100%',
+                    borderRadius: '70%',
                   }
                 : {
                     height: '100%',
@@ -124,13 +126,13 @@ const currentRouteName = computed(() => {
               <a-col :span="24">
                 <TeamOutlined
                   v-if="healthProfessionalActive"
-                  style="font-size: 24px; color: #e5a3a3"
+                  style="font-size: 24px; color: #f1b541"
                 />
                 <TeamOutlined v-else style="font-size: 24px" />
               </a-col>
               <a-col :span="24"
                 ><span
-                  :style="healthProfessionalActive ? { color: '#E5A3A3' } : {}"
+                  :style="healthProfessionalActive ? { color: '#f1b541' } : {}"
                   >Gallerie photo</span
                 >
               </a-col>
@@ -144,8 +146,9 @@ const currentRouteName = computed(() => {
             :style="
               accountActive
                 ? {
-                    backgroundColor: 'rgba(229,163,163, 0.1)',
+                    backgroundColor: 'rgba(241, 181, 65, 0.1)',
                     height: '100%',
+                    borderRadius: '70%',
                   }
                 : {
                     height: '100%',
@@ -156,12 +159,12 @@ const currentRouteName = computed(() => {
               <a-col :span="24">
                 <UserOutlined
                   v-if="accountActive"
-                  style="font-size: 24px; color: #e5a3a3"
+                  style="font-size: 24px; color: #f1b541"
                 />
                 <UserOutlined v-else style="font-size: 24px" />
               </a-col>
               <a-col :span="24"
-                ><span :style="accountActive ? { color: '#E5A3A3' } : {}"
+                ><span :style="accountActive ? { color: '#f1b541' } : {}"
                   >Profile</span
                 ></a-col
               >
@@ -179,6 +182,6 @@ const currentRouteName = computed(() => {
   width: 100%;
   height: 80px;
   background: #fff;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid #f1b541;
 }
 </style>
