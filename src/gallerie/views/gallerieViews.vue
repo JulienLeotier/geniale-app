@@ -6,6 +6,8 @@ import { IImage } from "../models/image";
 
 import { UploadProps } from "ant-design-vue";
 import { ref, computed, onBeforeMount, watch } from "vue";
+import AudioPlayer from "vue3-audio-player";
+import "vue3-audio-player/dist/style.css";
 
 const { getImages, deleteImage, postImage } = useImageApi();
 const { files, resetFiles } = useDragDropFileUpload();
@@ -108,7 +110,7 @@ const isPdf = (filePath: string) => {
       </a-flex>
     </a-row>
     <a-row style="width: 100%" align="center" justify="center">
-      <div style="margin-bottom: 100px">
+      <div style="margin-bottom: 100px; width: 100%">
         <a-col :span="24" v-for="image in data?.images" :key="image.id">
           <a-card style="margin: 8px">
             <template v-if="isVideo(image.file_path)">
@@ -119,11 +121,14 @@ const isPdf = (filePath: string) => {
               ></video>
             </template>
             <template v-else-if="isAudio(image.file_path)">
-              <audio
-                :src="urlBack + image.file_path"
-                controls
+              <AudioPlayer
                 style="width: 100%"
-              ></audio>
+                :option="{
+                  src: urlBack + image.file_path,
+                  title: 'your-audio-title',
+                  coverImage: './test.png',
+                }"
+              />
             </template>
             <template v-else-if="isPdf(image.file_path)">
               <embed

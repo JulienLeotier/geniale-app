@@ -26,6 +26,7 @@
     "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.4.31",
     "vue-router": "4",
+    "vue3-audio-player": "^1.0.7",
     "vue3-otp-input": "^0.5.21"
   },
   "devDependencies": {
