@@ -27,7 +27,6 @@ export const setupUseFetch = <TReturn>(
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           };
         }
-        ctx.options.credentials = "include";
         return ctx;
       },
       immediate: false,
