@@ -105,14 +105,14 @@ const isPdf = (filePath: string) => {
           type="primary"
           style="height: 56px; width: 302px"
         >
-          Transferer une image ou des images
+          Transferer des images, videos, audios
         </a-button>
       </a-flex>
     </a-row>
     <a-row style="width: 100%" align="center" justify="center">
       <div style="margin-bottom: 100px; width: 100%">
         <a-col :span="24" v-for="image in data?.images" :key="image.id">
-          <a-card style="margin: 8px">
+          <a-card style="margin: 8px; background-color: #247687; color: white">
             <template v-if="isVideo(image.file_path)">
               <video
                 :src="urlBack + image.file_path"

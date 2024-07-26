@@ -3,7 +3,7 @@ import { useWhoIAm } from "@/api/common-api/use-whoiam";
 import { IUser } from "@/api/models/api/user";
 import { useUser } from "@/parameter/compositions/use-user";
 import { IFormState, formState } from "@/parameter/models/formInput";
-import router, { CheckCodeRoute, LoginRoute } from "@/router";
+import router, { LoginRoute } from "@/router";
 import { useStore } from "@/store";
 import { buttonStyle } from "@/styles/button";
 
@@ -45,12 +45,6 @@ const onFinish = async (values: IFormState) => {
       store.setUser(whoI.value.user);
       if (whoI.value.user.is_google_user)
         message.success("Utilisateur modifié avec succès");
-      else {
-        if (user.value.email !== whoI.value.user.email) {
-          user.value = whoI.value.user;
-          router.push({ name: CheckCodeRoute.name });
-        }
-      }
     } else {
       message.error("Erreur lors de la récupération de l'utilisateur");
       router.push({ name: LoginRoute.name });

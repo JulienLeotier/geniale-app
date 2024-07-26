@@ -9,7 +9,6 @@ import RegisterView from "@/login/views/RegisterView.vue";
 import ResetPasswordView from "@/login/views/ResetPasswordView.vue";
 import OnbordingView from "@/onbording/views/onbordingView.vue";
 import AccountView from "@/parameter/views/AccountView.vue";
-import CheckCodeView from "@/parameter/views/CheckCodeView.vue";
 import CreateRightView from "@/roles/views/CreateRightView.vue";
 import CreateRoleView from "@/roles/views/CreateRoleView.vue";
 import RolesView from "@/roles/views/RolesView.vue";
@@ -150,30 +149,6 @@ export const AccountRoute = {
   },
 } as const as RouteRecordRaw;
 
-export const CheckCodeRoute = {
-  path: "/check-code",
-  name: "CheckCode",
-  component: CheckCodeView,
-  beforeEnter: async (_to, _from, next) => {
-    const store = useStore();
-    const { data: whoiam, fetch: getWhoIam } = useWhoIAm();
-    if (localStorage.getItem("token")) {
-      await getWhoIam({});
-      if (!whoiam.value) {
-        store.setToken(null);
-        store.setUser(null);
-        next({ name: "Login" });
-      } else {
-        store.setUser(whoiam.value.user);
-        next();
-      }
-    } else {
-      store.setToken(null);
-      store.setUser(null);
-      next({ name: "Login" });
-    }
-  },
-} as const as RouteRecordRaw;
 export const CreationRoleRoute = {
   path: "/create-role",
   name: "CreateRole",
@@ -315,7 +290,6 @@ const routes: Array<RouteRecordRaw> = [
   RolesRoute,
   createRightsRoute,
   onboardingRoute,
-  CheckCodeRoute,
   Register,
   GallerieRoute,
   AdminRoute,
