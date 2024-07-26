@@ -8,26 +8,7 @@ const onNext = () => {
 <template>
   <a-row justify="center" align="center" wrap="wrap" style="height: 100vh">
     <a-col
-      :xs="24"
-      :sm="12"
-      :md="12"
-      :lg="12"
-      :xl="12"
-      style="
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: center;
-      "
-    >
-      <a-image src="./logo.png" :preview="false" />
-    </a-col>
-    <a-col
-      :xs="24"
-      :sm="12"
-      :md="12"
-      :lg="12"
-      :xl="12"
+      :span="24"
       style="
         justify-content: center;
         display: flex;
@@ -37,18 +18,22 @@ const onNext = () => {
     >
       <a-row justify="center">
         <a-col :span="24">
-          <a-typography class="title-onbording">
-            Bienvenue dans
-            <div>GEN-IA-LE</div>
-          </a-typography>
-        </a-col>
-        <a-col :span="24">
-          <a-typography class="paragraphe-onbording">
-            Votre application de voyage temporel en toute sécurité et simplicité
-            lancer vous dans une aventure inoubliable avec GEN-IA-LE.
-            <br />
-            Pour commencer, veuillez vous connecter ou créer un compte.
-          </a-typography>
+          <a-card
+            title="GEN-IA-L"
+            style="width: 80vw; background-color: #247687; color: white"
+          >
+            <a-row justify="center">
+              <a-col :span="24">
+                <a-typography class="paragraphe-onbording">
+                  Votre application de voyage temporel en toute sécurité et
+                  simplicité lancer vous dans une aventure inoubliable avec
+                  GEN-IA-L.
+                  <br />
+                  Pour commencer, veuillez vous connecter ou créer un compte.
+                </a-typography>
+              </a-col>
+            </a-row>
+          </a-card>
         </a-col>
       </a-row>
     </a-col>
@@ -65,10 +50,17 @@ const onNext = () => {
   </a-row>
 </template>
 <style scoped>
+:deep(.ant-card-head-title) {
+  color: white !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  justify-content: center !important;
+}
 .title-onbording {
   font-size: 24px;
   font-weight: 700;
-  color: #000;
+  color: white;
   display: flex;
   justify-content: center;
   div {
@@ -80,7 +72,7 @@ const onNext = () => {
   font-size: 16px;
   padding: 8px;
   margin: 8px;
-  color: #797979;
+  color: white;
   text-align: center;
 }
 </style>

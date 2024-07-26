@@ -55,7 +55,7 @@ const handleOkError = (_e: MouseEvent) => {
             <a-image
               src="./image_forget_password.png"
               :preview="false"
-              style="max-width: 500px; max-height: auto"
+              style="max-width: 500px; max-height: 200px; border-radius: 50%"
             />
           </a-col>
           <a-col
@@ -66,30 +66,6 @@ const handleOkError = (_e: MouseEvent) => {
               align-content: center;
             "
           >
-            <a-row justify="center" align="center">
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <h1>Mot de passe oublié</h1>
-              </a-col>
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <a-typography>
-                  Entrez votre email pour réinitialiser votre mot de passe
-                </a-typography>
-              </a-col>
-            </a-row>
           </a-col>
           <a-col
             :span="24"
@@ -97,58 +73,96 @@ const handleOkError = (_e: MouseEvent) => {
               justify-content: center;
               display: flex;
               align-content: center;
-              width: 100vw;
+              width: 90vw;
             "
           >
-            <a-form
-              :model="formState"
-              name="normal_login"
-              layout="vertical"
-              :validate-messages="validateMessages"
-              @finish="onFinishForgetPassword"
-              @finishFailed="onFinishFailedForgetPassword"
-              style="width: 100vw; padding: 8px"
-              :disabled="askResetPasswordFetching"
+            <a-card
+              style="width: 90vw; background-color: #247687; color: white"
             >
-              <a-form-item
-                label="Email"
-                :name="['user', 'email']"
-                :rules="[
-                  {
-                    type: 'email',
-                    required: true,
-                  },
-                ]"
-                style="margin-left: 8px; margin-right: 8px"
-              >
-                <a-input
-                  v-model:value="formState.user.email"
-                  autocomplete="current-email"
-                  style="height: 48px"
-                  placeholder="Email"
+              <a-row justify="center" align="center">
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                    color: white;
+                  "
                 >
-                  <template #prefix>
-                    <UserOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input>
-              </a-form-item>
-
-              <a-form-item>
-                <a-flex justify="center" align="center">
-                  <a-button
-                    :disabled="disabledForgetPassword"
-                    type="primary"
-                    html-type="submit"
-                    style="height: 56px; width: 302px"
+                  <h1>Mot de passe oublié</h1>
+                </a-col>
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                  "
+                >
+                  <a-typography style="color: white">
+                    Entrez votre email pour réinitialiser votre mot de passe
+                  </a-typography>
+                </a-col>
+              </a-row>
+              <a-form
+                :model="formState"
+                name="normal_login"
+                layout="vertical"
+                :validate-messages="validateMessages"
+                @finish="onFinishForgetPassword"
+                @finishFailed="onFinishFailedForgetPassword"
+                style="width: 80vw; padding: 8px"
+                :disabled="askResetPasswordFetching"
+              >
+                <a-form-item
+                  label="Email"
+                  :name="['user', 'email']"
+                  :rules="[
+                    {
+                      type: 'email',
+                      required: true,
+                    },
+                  ]"
+                  style="margin-left: 8px; margin-right: 8px"
+                >
+                  <a-input
+                    v-model:value="formState.user.email"
+                    autocomplete="current-email"
+                    style="height: 48px"
+                    placeholder="Email"
                   >
-                    Envoyer un email de réinitialisation
-                  </a-button>
-                </a-flex>
-              </a-form-item>
-            </a-form>
+                    <template #prefix>
+                      <UserOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input>
+                </a-form-item>
+
+                <a-form-item>
+                  <a-flex justify="center" align="center">
+                    <a-button
+                      :disabled="disabledForgetPassword"
+                      type="primary"
+                      html-type="submit"
+                      style="height: 56px; width: 302px"
+                    >
+                      Envoyer un email de réinitialisation
+                    </a-button>
+                  </a-flex>
+                </a-form-item>
+              </a-form>
+            </a-card>
           </a-col>
         </a-row>
       </a-col>
     </a-row>
   </a-spin>
 </template>
+<style scoped>
+:deep(.ant-card .ant-card-body) {
+  padding: 0;
+  padding-left: 15px;
+}
+:deep(.ant-form-item .ant-form-item-label > label) {
+  color: white;
+}
+</style>

@@ -158,7 +158,7 @@ const currentRouteName = computed(() => {
               </a-col>
               <a-col :span="24"
                 ><span :style="GallerieActive ? { color: '#f1b541' } : {}"
-                  >Gallerie photo</span
+                  >Galleries</span
                 >
               </a-col>
             </a-row>
@@ -200,7 +200,7 @@ const currentRouteName = computed(() => {
     </a-layout-footer>
   </a-config-provider>
 </template>
-<style scoped>
+<style>
 .bottom-menu {
   position: fixed;
   bottom: 0;
@@ -208,5 +208,11 @@ const currentRouteName = computed(() => {
   height: 80px;
   background: #fff;
   border-top: 1px solid #f1b541;
+}
+body {
+  background-image: url("./background.png");
+  background-size: cover;
+  background-position: bottom;
+  height: 100%;
 }
 </style>

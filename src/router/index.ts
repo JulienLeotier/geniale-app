@@ -1,3 +1,4 @@
+import AdminViews from "@/admin/views/AdminViews.vue";
 import { useWhoIAm } from "@/api/common-api/use-whoiam";
 import { ParamsToObject } from "@/api/utils/parse-object-value-to-string";
 import GallerieViews from "@/gallerie/views/gallerieViews.vue";
@@ -33,6 +34,35 @@ export const HomeRoute = {
   path: "/home",
   name: "Home",
   component: HomeViews,
+  beforeEnter: async (_to, _from, next) => {
+    const store = useStore();
+    const { data: whoiam, fetch: getWhoIam } = useWhoIAm();
+    const response = ParamsToObject(document.location.search);
+    if (response.token) {
+      store.setToken(response.token);
+    }
+    if (localStorage.getItem("token")) {
+      await getWhoIam({});
+      if (!whoiam.value) {
+        store.setToken(null);
+        store.setUser(null);
+        next({ name: "Login" });
+      } else {
+        store.setUser(whoiam.value.user);
+        next();
+      }
+    } else {
+      store.setToken(null);
+      store.setUser(null);
+      next({ name: "Login" });
+    }
+  },
+} as const as RouteRecordRaw;
+
+export const AdminRoute = {
+  path: "/admin",
+  name: "Admin",
+  component: AdminViews,
   beforeEnter: async (_to, _from, next) => {
     const store = useStore();
     const { data: whoiam, fetch: getWhoIam } = useWhoIAm();
@@ -288,6 +318,7 @@ const routes: Array<RouteRecordRaw> = [
   CheckCodeRoute,
   Register,
   GallerieRoute,
+  AdminRoute,
 ];
 
 const router = createRouter({

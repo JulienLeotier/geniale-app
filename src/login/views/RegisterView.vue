@@ -55,42 +55,8 @@ const handleOkError = (_e: MouseEvent) => {
             <a-image
               src="./image_register.png"
               :preview="false"
-              style="max-width: 500px; max-height: auto"
+              style="max-width: 500px; max-height: 200px; border-radius: 50%"
             />
-          </a-col>
-          <a-col
-            :span="24"
-            style="
-              justify-content: center;
-              display: flex;
-              align-content: center;
-            "
-          >
-            <a-row justify="center" align="center">
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <h1>Enregistrement du compte</h1>
-              </a-col>
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <a-typography>
-                  Entrez un email, un nom d'utilisateur et un mot de passe pour
-                  créer un compte
-                </a-typography>
-              </a-col>
-            </a-row>
           </a-col>
           <a-col
             :span="24"
@@ -101,136 +67,174 @@ const handleOkError = (_e: MouseEvent) => {
               width: 100vw;
             "
           >
-            <a-form
-              :model="RegisterformState"
-              name="normal_login"
-              layout="vertical"
-              :validate-messages="validateMessages"
-              @finish="onFinishRegister"
-              style="width: 100vw; padding: 8px"
+            <a-card
+              style="width: 90vw; background-color: #247687; color: white"
             >
-              <a-form-item
-                label="Email"
-                :name="['user', 'email']"
-                :rules="[
-                  {
-                    type: 'email',
-                    required: true,
-                  },
-                ]"
-                style="margin-left: 8px; margin-right: 8px"
-              >
-                <a-input
-                  v-model:value="RegisterformState.user.email"
-                  autocomplete="current-email"
-                  style="height: 48px"
-                  placeholder="Email"
+              <a-row justify="center" align="center">
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                  "
                 >
-                  <template #prefix>
-                    <UserOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input>
-              </a-form-item>
-              <a-form-item
-                label="Nom d'utilisateur"
-                :name="['user', 'username']"
-                style="margin-left: 8px; margin-right: 8px"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Veuillez entrer votre nom d\'utilisateur',
-                  },
-                ]"
-              >
-                <a-input
-                  v-model:value="RegisterformState.user.username"
-                  autocomplete="username"
-                  style="height: 48px"
-                  placeholder="Nom d'utilisateur"
+                  <h1>Enregistrement du compte</h1>
+                </a-col>
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                  "
                 >
-                  <template #prefix>
-                    <UserOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input>
-              </a-form-item>
-              <a-form-item
-                label="Mot de passe"
-                :name="['user', 'password']"
-                style="margin-left: 8px; margin-right: 8px"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Veuillez entrer votre nouveau mot de passe',
-                  },
-                  {
-                    min: 6,
-                    message:
-                      'Le mot de passe doit contenir au moins 6 caractères',
-                  },
-                  {
-                    pattern: /[a-zA-Z]/,
-                    message:
-                      'Le mot de passe doit contenir au moins une lettre',
-                  },
-                  {
-                    pattern: /\d/,
-                    message:
-                      'Le mot de passe doit contenir au moins un chiffre',
-                  },
-                ]"
+                  <a-typography style="color: white">
+                    Entrez un email, un nom d'utilisateur et un mot de passe
+                    pour créer un compte
+                  </a-typography>
+                </a-col>
+              </a-row>
+              <a-form
+                :model="RegisterformState"
+                name="normal_login"
+                layout="vertical"
+                :validate-messages="validateMessages"
+                @finish="onFinishRegister"
+                style="width: 80vw; padding: 8px"
               >
-                <a-input-password
-                  v-model:value="RegisterformState.user.password"
-                  autocomplete="current-password"
-                  style="height: 48px"
-                  placeholder="Mot de passe"
+                <a-form-item
+                  label="Email"
+                  :name="['user', 'email']"
+                  :rules="[
+                    {
+                      type: 'email',
+                      required: true,
+                    },
+                  ]"
+                  style="margin-left: 8px; margin-right: 8px"
                 >
-                  <template #prefix>
-                    <LockOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input-password>
-              </a-form-item>
-              <a-form-item
-                label="Confirmer le mot de passe"
-                :name="['user', 'confirmPassword']"
-                style="margin-left: 8px; margin-right: 8px"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Veuillez entrer votre nouveau mot de passe',
-                  },
-                  {
-                    validator: validateConfirmPassword,
-                  },
-                ]"
-              >
-                <a-input-password
-                  v-model:value="RegisterformState.user.confirmPassword"
-                  autocomplete="new-password"
-                  style="height: 48px"
-                  placeholder="Confirmer le mot de passe"
-                >
-                  <template #prefix>
-                    <LockOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input-password>
-              </a-form-item>
-              <a-form-item>
-                <a-flex justify="center" align="center">
-                  <a-button
-                    :disabled="disabledRegister"
-                    type="primary"
-                    html-type="submit"
-                    style="height: 56px; width: 302px"
+                  <a-input
+                    v-model:value="RegisterformState.user.email"
+                    autocomplete="current-email"
+                    style="height: 48px"
+                    placeholder="Email"
                   >
-                    Créer un compte d'agent
-                  </a-button>
-                </a-flex>
-              </a-form-item>
-            </a-form>
+                    <template #prefix>
+                      <UserOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input>
+                </a-form-item>
+                <a-form-item
+                  label="Nom d'utilisateur"
+                  :name="['user', 'username']"
+                  style="margin-left: 8px; margin-right: 8px"
+                  :rules="[
+                    {
+                      required: true,
+                      message: 'Veuillez entrer votre nom d\'utilisateur',
+                    },
+                  ]"
+                >
+                  <a-input
+                    v-model:value="RegisterformState.user.username"
+                    autocomplete="username"
+                    style="height: 48px"
+                    placeholder="Nom d'utilisateur"
+                  >
+                    <template #prefix>
+                      <UserOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input>
+                </a-form-item>
+                <a-form-item
+                  label="Mot de passe"
+                  :name="['user', 'password']"
+                  style="margin-left: 8px; margin-right: 8px"
+                  :rules="[
+                    {
+                      required: true,
+                      message: 'Veuillez entrer votre nouveau mot de passe',
+                    },
+                    {
+                      min: 6,
+                      message:
+                        'Le mot de passe doit contenir au moins 6 caractères',
+                    },
+                    {
+                      pattern: /[a-zA-Z]/,
+                      message:
+                        'Le mot de passe doit contenir au moins une lettre',
+                    },
+                    {
+                      pattern: /\d/,
+                      message:
+                        'Le mot de passe doit contenir au moins un chiffre',
+                    },
+                  ]"
+                >
+                  <a-input-password
+                    v-model:value="RegisterformState.user.password"
+                    autocomplete="current-password"
+                    style="height: 48px"
+                    placeholder="Mot de passe"
+                  >
+                    <template #prefix>
+                      <LockOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input-password>
+                </a-form-item>
+                <a-form-item
+                  label="Confirmer le mot de passe"
+                  :name="['user', 'confirmPassword']"
+                  style="margin-left: 8px; margin-right: 8px"
+                  :rules="[
+                    {
+                      required: true,
+                      message: 'Veuillez entrer votre nouveau mot de passe',
+                    },
+                    {
+                      validator: validateConfirmPassword,
+                    },
+                  ]"
+                >
+                  <a-input-password
+                    v-model:value="RegisterformState.user.confirmPassword"
+                    autocomplete="new-password"
+                    style="height: 48px"
+                    placeholder="Confirmer le mot de passe"
+                  >
+                    <template #prefix>
+                      <LockOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input-password>
+                </a-form-item>
+                <a-form-item>
+                  <a-flex justify="center" align="center">
+                    <a-button
+                      :disabled="disabledRegister"
+                      type="primary"
+                      html-type="submit"
+                      style="height: 56px; width: 302px"
+                    >
+                      Rejoindre l'agence
+                    </a-button>
+                  </a-flex>
+                </a-form-item>
+              </a-form>
+            </a-card>
           </a-col>
         </a-row>
       </a-col>
     </a-row>
   </a-spin>
 </template>
+<style scoped>
+:deep(.ant-card .ant-card-body) {
+  padding: 0;
+  padding-left: 15px;
+}
+:deep(.ant-form-item .ant-form-item-label > label) {
+  color: white;
+}
+</style>

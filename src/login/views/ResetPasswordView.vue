@@ -66,39 +66,8 @@ const handleOkError = (_e: MouseEvent) => {
             <a-image
               src="./image_reset_password.png"
               :preview="false"
-              style="max-width: 500px; max-height: auto"
+              style="max-width: 500px; max-height: 200px; border-radius: 50%"
             />
-          </a-col>
-          <a-col
-            :span="24"
-            style="
-              justify-content: center;
-              display: flex;
-              align-content: center;
-            "
-          >
-            <a-row justify="center" align="center">
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <h1>Réinitialisation du mot de passe</h1>
-              </a-col>
-              <a-col
-                :span="24"
-                style="
-                  justify-content: center;
-                  display: flex;
-                  align-content: center;
-                "
-              >
-                <a-typography> Entrez votre nouveau mot de passe </a-typography>
-              </a-col>
-            </a-row>
           </a-col>
           <a-col
             :span="24"
@@ -109,101 +78,139 @@ const handleOkError = (_e: MouseEvent) => {
               width: 100vw;
             "
           >
-            <a-form
-              :model="resetPasswordFormState"
-              name="reset_password"
-              layout="vertical"
-              :validate-messages="validateMessages"
-              @finish="onFinishResetPassword"
-              style="width: 100vw; padding: 8px"
-              :disabled="ResetPasswordFeching"
+            <a-card
+              style="width: 90vw; background-color: #247687; color: white"
             >
-              <a-form-item
-                label="Nom d'utilisateur"
-                :name="['user', 'username']"
-                style="display: none"
-              >
-                <a-input
-                  v-model:value="resetPasswordFormState.user.password"
-                  autocomplete="username"
-                />
-              </a-form-item>
-              <a-form-item
-                label="Mot de passe"
-                :name="['user', 'password']"
-                style="margin-left: 8px; margin-right: 8px"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Veuillez entrer votre mot de passe',
-                  },
-                  {
-                    min: 6,
-                    message:
-                      'Le mot de passe doit contenir au moins 6 caractères',
-                  },
-                  {
-                    pattern: /[a-zA-Z]/,
-                    message:
-                      'Le mot de passe doit contenir au moins une lettre',
-                  },
-                  {
-                    pattern: /\d/,
-                    message:
-                      'Le mot de passe doit contenir au moins un chiffre',
-                  },
-                ]"
-              >
-                <a-input-password
-                  v-model:value="resetPasswordFormState.user.password"
-                  autocomplete="new-password"
-                  style="height: 48px"
+              <a-row justify="center" align="center">
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                    color: white;
+                  "
                 >
-                  <template #prefix>
-                    <LockOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input-password>
-              </a-form-item>
-              <a-form-item
-                label="Confirmer le mot de passe"
-                :name="['user', 'confirmPassword']"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Veuillez confirmer votre mot de passe',
-                  },
-                  {
-                    validator: validateConfirmPassword,
-                  },
-                ]"
-                style="margin-left: 8px; margin-right: 8px"
-              >
-                <a-input-password
-                  v-model:value="resetPasswordFormState.user.confirmPassword"
-                  autocomplete="new-password"
-                  style="height: 48px"
+                  <h1>Réinitialisation du mot de passe</h1>
+                </a-col>
+                <a-col
+                  :span="24"
+                  style="
+                    justify-content: center;
+                    display: flex;
+                    align-content: center;
+                  "
                 >
-                  <template #prefix>
-                    <LockOutlined class="site-form-item-icon" />
-                  </template>
-                </a-input-password>
-              </a-form-item>
-              <a-form-item>
-                <a-flex justify="center" align="center">
-                  <a-button
-                    :disabled="disabledResetPassword"
-                    type="primary"
-                    html-type="submit"
-                    style="height: 56px; width: 302px"
+                  <a-typography style="color: white">
+                    Entrez votre nouveau mot de passe
+                  </a-typography>
+                </a-col>
+              </a-row>
+              <a-form
+                :model="resetPasswordFormState"
+                name="reset_password"
+                layout="vertical"
+                :validate-messages="validateMessages"
+                @finish="onFinishResetPassword"
+                style="width: 80vw; padding: 8px"
+                :disabled="ResetPasswordFeching"
+              >
+                <a-form-item
+                  label="Nom d'utilisateur"
+                  :name="['user', 'username']"
+                  style="display: none"
+                >
+                  <a-input
+                    v-model:value="resetPasswordFormState.user.password"
+                    autocomplete="username"
+                  />
+                </a-form-item>
+                <a-form-item
+                  label="Mot de passe"
+                  :name="['user', 'password']"
+                  style="margin-left: 8px; margin-right: 8px"
+                  :rules="[
+                    {
+                      required: true,
+                      message: 'Veuillez entrer votre mot de passe',
+                    },
+                    {
+                      min: 6,
+                      message:
+                        'Le mot de passe doit contenir au moins 6 caractères',
+                    },
+                    {
+                      pattern: /[a-zA-Z]/,
+                      message:
+                        'Le mot de passe doit contenir au moins une lettre',
+                    },
+                    {
+                      pattern: /\d/,
+                      message:
+                        'Le mot de passe doit contenir au moins un chiffre',
+                    },
+                  ]"
+                >
+                  <a-input-password
+                    v-model:value="resetPasswordFormState.user.password"
+                    autocomplete="new-password"
+                    style="height: 48px"
                   >
-                    Réinitialiser le mot de passe
-                  </a-button>
-                </a-flex>
-              </a-form-item>
-            </a-form>
+                    <template #prefix>
+                      <LockOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input-password>
+                </a-form-item>
+                <a-form-item
+                  label="Confirmer le mot de passe"
+                  :name="['user', 'confirmPassword']"
+                  :rules="[
+                    {
+                      required: true,
+                      message: 'Veuillez confirmer votre mot de passe',
+                    },
+                    {
+                      validator: validateConfirmPassword,
+                    },
+                  ]"
+                  style="margin-left: 8px; margin-right: 8px"
+                >
+                  <a-input-password
+                    v-model:value="resetPasswordFormState.user.confirmPassword"
+                    autocomplete="new-password"
+                    style="height: 48px"
+                  >
+                    <template #prefix>
+                      <LockOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input-password>
+                </a-form-item>
+                <a-form-item>
+                  <a-flex justify="center" align="center">
+                    <a-button
+                      :disabled="disabledResetPassword"
+                      type="primary"
+                      html-type="submit"
+                      style="height: 56px; width: 302px"
+                    >
+                      Réinitialiser le mot de passe
+                    </a-button>
+                  </a-flex>
+                </a-form-item>
+              </a-form>
+            </a-card>
           </a-col>
         </a-row>
       </a-col>
     </a-row>
   </a-spin>
 </template>
+<style scoped>
+:deep(.ant-card .ant-card-body) {
+  padding: 0;
+  padding-left: 15px;
+}
+:deep(.ant-form-item .ant-form-item-label > label) {
+  color: white;
+}
+</style>
