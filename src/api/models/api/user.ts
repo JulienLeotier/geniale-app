@@ -12,3 +12,7 @@ export interface IUser {
   is_google_user: boolean;
   email_checked: boolean;
 }
+
+export interface IUsers {
+  users: IUser[];
+}

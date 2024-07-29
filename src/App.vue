@@ -3,6 +3,8 @@ import { theme } from "@/assets/theme";
 
 import {
   AccountRoute,
+  AdminRoute,
+  CreateRoomRoute,
   ForgetPassword,
   GallerieRoute,
   HomeRoute,
@@ -89,7 +91,9 @@ const currentRouteName = computed(() => {
     currentRouter.value.name !== onboardingRoute.name &&
     currentRouter.value.name !== ForgetPassword.name &&
     currentRouter.value.name !== ResetPassword.name &&
-    currentRouter.value.name !== Register.name
+    currentRouter.value.name !== Register.name &&
+    currentRouter.value.name !== AdminRoute.name &&
+    currentRouter.value.name !== CreateRoomRoute.name
   );
 });
 </script>
