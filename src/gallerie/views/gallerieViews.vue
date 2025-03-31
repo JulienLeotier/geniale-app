@@ -32,7 +32,7 @@ const {
   fetch: FetchingDelete,
 } = deleteImage();
 const { isFetching: isFetchingUpdate, fetch: FetchingUpdate } = postImage();
-const urlBack = "http://quest.freeboxos.fr:37590/";
+const urlBack = "http://localhost:8080/";
 const showUpdateModal = ref(false);
 
 onBeforeMount(async () => {
